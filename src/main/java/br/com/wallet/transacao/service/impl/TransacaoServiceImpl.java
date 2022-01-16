@@ -7,6 +7,7 @@ import br.com.wallet.transacao.mapper.TransacaoMapper;
 import br.com.wallet.transacao.repository.TransacaoRepository;
 import br.com.wallet.transacao.service.TransacaoService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TransacaoServiceImpl implements TransacaoService {
     private final TransacaoRepository repository;
     private final TransacaoMapper mapper;
@@ -28,6 +30,7 @@ public class TransacaoServiceImpl implements TransacaoService {
 
     @Override
     public Page<TransacaoResponse> retornarTransacoes(Pageable pageable, String numeroConta) {
+        log.info("Consultando transações da conta {}", numeroConta);
         return this.repository.findByContaOrigem(pageable, numeroConta)
                 .map(this.mapper::paraTransacaoResponse);
     }
