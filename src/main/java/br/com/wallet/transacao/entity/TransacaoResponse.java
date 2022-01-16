@@ -1,13 +1,12 @@
 package br.com.wallet.transacao.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,6 +21,6 @@ public class TransacaoResponse {
     private String agenciaDestino;
     private String contaDestino;
     private Long valorCreditado;
-    @JsonSerialize(using = OffsetDateTimeSerializer.class)
-    private OffsetDateTime timestamp;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dataHoraRecebimentoInformacao;
 }
